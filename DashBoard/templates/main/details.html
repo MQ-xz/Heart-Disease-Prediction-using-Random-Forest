@@ -1,0 +1,73 @@
+{% extends 'main/nav.html' %}
+{% load crispy_forms_tags %}
+{% block DashBoard %}
+<div class="card-header py-3">
+    <h5 class="mb-0 text-center"><strong>Check Health</strong></h5>
+</div>
+<div class="container">
+    <br>
+    <form action="{% url 'detail' %}" method="post">
+        {% csrf_token %}
+        <div class="row">
+            <div class="col-6">
+                {{ form.age|as_crispy_field }}
+            </div>
+            <div class="col-6 helptext">
+                {{ form.sex|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                {{ form.cp|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.trestbps|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                {{ form.chol|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.fbs|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                {{ form.restecg|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.thalach|as_crispy_field }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-6">
+                {{ form.exang|as_crispy_field }}
+            </div>
+            <div class="col-6">
+                {{ form.oldpeak|as_crispy_field }}
+            </div>
+        </div>
+        {{ form.slope|as_crispy_field }}
+        <br>
+        <button type="submit" class="btn btn-success">Save</button>
+    </form>
+    <br>
+</div>
+<!-- <center>
+<form style="max-width: 30%;" method="post">
+    {% csrf_token %}
+    {{ form | crispy }}
+    {% if form.errors %}
+    <div class="alert alert-danger">
+        <ul>
+            {% for error in form.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    </div>
+    {% endif %}
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+</center> -->
+{% endblock %}
