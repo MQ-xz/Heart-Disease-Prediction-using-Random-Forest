@@ -36,17 +36,27 @@ class Detail(models.Model):
         (1, 'No'),
         (2, 'Yes')
     )
+    FBS = (
+        (0, 'False'),
+        (1, 'True')
+    )
+    EXANG = (
+        (0, 'No'),
+        (1, 'Yes')
+    )
     age = models.IntegerField()
     sex = models.IntegerField(choices=SEX)
     cp = models.IntegerField(choices=CP)
     trestbps = models.IntegerField()
     chol = models.IntegerField()
-    fbs = models.BooleanField()
+    fbs = models.IntegerField(choices=FBS)
     restecg = models.IntegerField(choices=RESTECG)
     thalach = models.IntegerField()
-    exang = models.BooleanField()
+    exang = models.IntegerField(choices=EXANG)
     oldpeak = models.IntegerField()
     slope = models.IntegerField(choices=SLOPE)
     ca = models.IntegerField()
     thal = models.IntegerField(choices=THAL)
     target = models.IntegerField(choices=TARGET)
+    pos = models.FloatField()
+    user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
