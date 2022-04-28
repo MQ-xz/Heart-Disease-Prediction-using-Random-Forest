@@ -87,7 +87,6 @@ class Detail(View):
         x = model.predict_proba(array_features)
         pos = x[0][1]
         pos = pos * 100
-        print(prediction[0], pos)
 
         data = request.POST.copy()
         data['pos'] = pos
