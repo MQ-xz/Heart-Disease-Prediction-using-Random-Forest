@@ -1,44 +1,81 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-<!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <!-- Container wrapper -->
-    <div class="container">
-        <!-- Navbar brand -->
-        <a class="navbar-brand me-2" href="">
-            <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="16" alt="MDB Logo"
-                loading="lazy" style="margin-top: -1px;" />
-        </a>
-
-        <!-- Toggle button -->
-        <button class="navbar-toggler" type="button" data-mdb-toggle="collapse" data-mdb-target="#navbarButtonsExample"
-            aria-controls="navbarButtonsExample" aria-expanded="false" aria-label="Toggle navigation">
-            <i class="fas fa-bars"></i>
-        </button>
-
-        <!-- Collapsible wrapper -->
-        <div class="collapse navbar-collapse" id="navbarButtonsExample">
-            <!-- Left links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">DashBoard</a>
-                </li>
-            </ul>
-            <!-- Left links -->
-
-            <div class="d-flex align-items-center">
-                <a href="{% url 'logout' %}">
-                    <button type="button" class="btn btn-link px-3 me-2">
-                        LogOut
-                    </button>
+<!--Main Navigation-->
+<header>
+    <!-- Sidebar -->
+    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+        <div class="position-sticky">
+            <div class="list-group list-group-flush mx-3 mt-4">
+                <a href="{% url 'dashboard' %}" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-chart-line fa-fw me-3"></i>
+                    <span>Check Health</span>
                 </a>
+                <a href="{% url 'history' %}" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-chart-bar fa-fw me-3"></i>
+                    <span>Your History</span>
+                </a>
+                {% if user.is_staff %}
+                <a href="{% url 'users' %}" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-user fa-fw me-3"></i>
+                    <span>Users</span>
+                </a>
+                {% endif %}
             </div>
         </div>
-        <!-- Collapsible wrapper -->
+    </nav>
+    <!-- Sidebar -->
+
+    <!-- Navbar -->
+    <nav id="main-navbar" class="navbar navbar-expand-lg navbar-light bg-white fixed-top">
+        <!-- Container wrapper -->
+        <div class="container">
+            <!-- Navbar brand -->
+            <a class="navbar-brand me-2" href="">
+                <img src="https://mdbcdn.b-cdn.net/img/logo/mdb-transaprent-noshadows.webp" height="16" alt="MDB Logo"
+                    loading="lazy" style="margin-top: -1px;" />
+            </a>
+
+            <!-- Toggle button -->
+            <button class="navbar-toggler" type="button" data-mdb-toggle="collapse"
+                data-mdb-target="#navbarButtonsExample" aria-controls="navbarButtonsExample" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+
+            <!-- Collapsible wrapper -->
+            <div class="collapse navbar-collapse" id="navbarButtonsExample">
+                <!-- Left links -->
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link" href="">DashBoard</a>
+                    </li>
+                </ul>
+                <!-- Left links -->
+
+                <div class="d-flex align-items-center">
+                    <a href="{% url 'logout' %}">
+                        <button type="button" class="btn btn-link px-3 me-2">
+                            LogOut
+                        </button>
+                    </a>
+                </div>
+            </div>
+            <!-- Collapsible wrapper -->
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+</header>
+<!--Main Navigation-->
+
+<!--Main layout-->
+<main style="margin-top: 58px;">
+    <div class="container pt-4">
+        {% block DashBoard %}
+        {% endblock %}
     </div>
-    <!-- Container wrapper -->
-</nav>
-{% block DashBoard %}
-{% endblock %}
+
+</main>
+<!--Main layout-->
 {% endblock %}

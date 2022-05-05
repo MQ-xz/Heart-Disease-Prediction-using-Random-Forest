@@ -1,0 +1,54 @@
+{% extends 'main/nav.html' %}
+{% load crispy_forms_tags %}
+{% block DashBoard %}
+<div class="card-header py-3">
+    <h5 class="mb-0 text-center"><strong>Health check history</strong></h5>
+</div>
+<div class="container">
+    <br>
+    <table class="table align-middle mb-0 bg-white">
+        <thead class="bg-light">
+            <tr>
+                {% for attribute in attributes %}
+                <th>{{ attribute.name }}</th>
+                {% endfor %}
+
+            </tr>
+        </thead>
+        <tbody>
+            <!-- for each history print each attributes values -->
+            {% if histories %}
+            {% for history in histories %}
+            <tr>
+                <td>{{ history.age }}</td>
+                <td>{{ history.sex }}</td>
+                <td>{{ history.cp }}</td>
+                <td>{{ history.trestbps }}</td>
+                <td>{{ history.chol }}</td>
+                <td>{{ history.fbs }}</td>
+                <td>{{ history.restecg }}</td>
+                <td>{{ history.thalach }}</td>
+                <td>{{ history.exang }}</td>
+                <td>{{ history.oldpeak }}</td>
+                <td>{{ history.slope }}</td>
+                <td>{{ history.ca }}</td>
+                <td>{{ history.thal }}</td>
+                <td>{{ history.target }}</td>
+                <td>{{ history.pos }}%</td>
+                <td>{{ history.createdAt|date:"d/m/Y" }}</td>
+                <!-- <td>PRint</td> -->
+            </tr>
+
+            {% endfor %}
+
+            {% else %}
+            <tr>
+                <td colspan="12">No data</td>
+            </tr>
+            {% endif %}
+
+
+        </tbody>
+    </table>
+</div>
+{% endblock %}

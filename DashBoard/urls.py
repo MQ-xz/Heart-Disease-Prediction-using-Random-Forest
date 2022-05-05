@@ -8,5 +8,7 @@ urlpatterns = [
     path('register', Register.as_view(), name='register'),
     path('logout', Logout.as_view(), name='logout'),
 
-    path('detail', Detail.as_view(), name='detail'),
+    path('dashboard', CheckHealth.as_view(), name='dashboard'),
+    path('history', HistoryView.as_view(), name='history'),
+    path('user', Users.as_view(), name='users'),
 ]

@@ -1,7 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from django import forms
-from .models import Detail
+from .models import History
 
 
 class NewUserForm(UserCreationForm):
@@ -17,8 +17,8 @@ class NewUserForm(UserCreationForm):
         return user
 
 
-class DetailForm(forms.ModelForm):
+class HealthCheckForm(forms.ModelForm):
 
     class Meta:
-        model = Detail
+        model = History
         fields = '__all__'

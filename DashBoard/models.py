@@ -2,7 +2,7 @@ from django.db import models
 
 
 # Create your models here.
-class Detail(models.Model):
+class History(models.Model):
     SEX = (
         (0, 'Female'),
         (1, 'Male')
@@ -60,3 +60,4 @@ class Detail(models.Model):
     target = models.IntegerField(choices=TARGET)
     pos = models.FloatField()
     user = models.ForeignKey('auth.User', on_delete=models.CASCADE)
+    createdAt = models.DateTimeField(auto_now_add=True)
