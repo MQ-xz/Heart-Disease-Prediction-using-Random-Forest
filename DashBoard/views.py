@@ -144,3 +144,11 @@ class Users(ListView):
 
     def get_queryset(self):
         return User.objects.all()
+
+
+class UserDetail(View):
+    def get(self, request, pk):
+        user = User.objects.get(id=pk)
+        histories = History.objects.filter(user=user)
+        attributes = [i for i in History._meta.get_fields() if i.name not in ['id', 'user']]
+        return render(request, 'admin/user.html', {'user': user, 'histories': histories, 'attributes': attributes})
