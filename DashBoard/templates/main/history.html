@@ -12,6 +12,8 @@
                 {% for attribute in attributes %}
                 <th>{{ attribute.name }}</th>
                 {% endfor %}
+                <td>Action</td>
+
 
             </tr>
         </thead>
@@ -36,7 +38,7 @@
                 <td>{{ history.target }}</td>
                 <td>{{ history.pos }}%</td>
                 <td>{{ history.createdAt|date:"d/m/Y" }}</td>
-                <!-- <td>PRint</td> -->
+                <td> <a href="{% url 'printHistory' history.id %}" class="btn btn-primary">Print</a></td>
             </tr>
 
             {% endfor %}

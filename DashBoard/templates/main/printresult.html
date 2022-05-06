@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+<h1> Heart Disease Prediction Result</h1>
+<p>
+    <strong>Age : </strong> {{ history.age }}<br>
+    <strong>Sex : </strong> {{ history.sex }}<br>
+    <strong>Chest Pain Type : </strong> {{ history.cp }}<br>
+    <strong>Resting Blood Pressure (mmHg) : </strong> {{ history.trestbps }}<br>
+    <strong>Serum Cholestoral (mg/dl) : </strong> {{ history.chol }}<br>
+    <strong>Fasting Blood Sugar > 120 mg/dl : </strong> {{ history.fbs }}<br>
+    <strong>Resting Electrocardiographic Results : </strong> {{ history.restecg }}<br>
+    <strong>Maximum Heart Rate : </strong> {{ history.thalach }}<br>
+    <strong>Exercise Induced Angina : </strong> {{ history.exang }}<br>
+    <strong>ST Depression (mmHg) : </strong> {{ history.oldpeak }}<br>
+    <strong>Slope of Peak Exercise ST Segment : </strong> {{ history.slope }}<br>
+    <strong>Number of Vessels Colored by Flourosopy : </strong> {{ history.ca }}<br>
+    <strong>Thalassemia </strong> {{ history.thal }}<br>
+</p>
+{% for message in messages %}
+<div class="alert alert-{{ message.tags }}" role="alert">
+    {{ message.message }}
+</div>
+{% endfor %}
+{% endblock %}

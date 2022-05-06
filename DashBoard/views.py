@@ -125,6 +125,19 @@ class HistoryView(ListView):
         return History.objects.filter(user=self.request.user)
 
 
+class PrintResult(View):
+    def get(self, request, pk):
+        history = History.objects.get(pk=pk)
+        attributes = [i for i in History._meta.get_fields() if i.name not in ['id']]
+        if history.pos > 70:
+            messages.error(request, f'Probability of having heart disease: {history.pos}% \n Risk of having heart disease: HIGH')
+        elif history.pos > 40:
+            messages.warning(request, f'Probability of having heart disease: {history.pos}% \n Risk of having heart disease: MEDIUM')
+        else:
+            messages.success(request, f'Probability of having heart disease: {history.pos}% \n Risk of having heart disease: LOW')
+        return render(request=request, template_name="main/printresult.html", context={"history": history, 'attributes': attributes})
+
+
 class Users(ListView):
     template_name = 'admin/users.html'
     context_object_name = 'users'
