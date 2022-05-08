@@ -9,11 +9,19 @@ from .forms import *
 import pickle
 import numpy as np
 from .models import History
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 model = pickle.load(open('model.pkl', 'rb'))
 
 
 # Create your views here.
+
+class StaffRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
+
+    def test_func(self):
+        return self.request.user.is_staff
+
+
 def index(request):
     if not request.user.is_authenticated:
         return render(request, template_name='auth/home.html')
@@ -66,13 +74,13 @@ class Register(View):
             return render(request=request, template_name="auth/register.html", context={"form": form})
 
 
-class Logout(View):
+class Logout(LoginRequiredMixin, View):
     def get(self, request):
         logout(request)
         return redirect(index)
 
 
-class CheckHealth(View):
+class CheckHealth(LoginRequiredMixin, View):
     def get(self, request):
         form = HealthCheckForm()
         return render(request=request, template_name="main/checkhealth.html", context={"form": form})
@@ -108,7 +116,7 @@ class CheckHealth(View):
         return render(request=request, template_name="main/checkhealth.html", context={"form": form})
 
 
-class HistoryView(ListView):
+class HistoryView(LoginRequiredMixin, ListView):
     template_name = 'main/history.html'
     model = History
     context_object_name = 'histories'
@@ -125,8 +133,13 @@ class HistoryView(ListView):
         return History.objects.filter(user=self.request.user)
 
 
-class PrintResult(View):
+class PrintResult(LoginRequiredMixin, View):
     def get(self, request, pk):
+        if not request.user.is_staff:
+            try:
+                History.objects.get(pk=pk, user=request.user)
+            except History.DoesNotExist:
+                return redirect('history')
         history = History.objects.get(pk=pk)
         attributes = [i for i in History._meta.get_fields() if i.name not in ['id']]
         if history.pos > 70:
@@ -138,7 +151,7 @@ class PrintResult(View):
         return render(request=request, template_name="main/printresult.html", context={"history": history, 'attributes': attributes})
 
 
-class Users(ListView):
+class Users(StaffRequiredMixin, ListView):
     template_name = 'admin/users.html'
     context_object_name = 'users'
 
@@ -159,7 +172,7 @@ class Users(ListView):
         return User.objects.all()
 
 
-class UserDetail(View):
+class UserDetail(StaffRequiredMixin, View):
     def get(self, request, pk):
         user = User.objects.get(id=pk)
         histories = History.objects.filter(user=user)

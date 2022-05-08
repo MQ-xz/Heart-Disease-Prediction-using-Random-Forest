@@ -11,7 +11,7 @@ urlpatterns = [
     path('dashboard', CheckHealth.as_view(), name='dashboard'),
 
     path('history', HistoryView.as_view(), name='history'),
-    path('printHistory/<int:pk>', PrintResult.as_view(), name='printHistory'),
+    path('history/<int:pk>', PrintResult.as_view(), name='printHistory'),
     
     path('user', Users.as_view(), name='users'),
     path('user/<int:pk>', UserDetail.as_view(), name='userDetail'),
