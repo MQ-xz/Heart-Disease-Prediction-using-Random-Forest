@@ -1,25 +1,109 @@
-{% extends "base.html" %}
+{% extends 'main/nav.html' %}
 {% load crispy_forms_tags %}
-{% block content %}
-<h1> Heart Disease Prediction Result</h1>
-<p>
-    <strong>Age : </strong> {{ history.age }}<br>
-    <strong>Sex : </strong> {{ history.sex }}<br>
-    <strong>Chest Pain Type : </strong> {{ history.cp }}<br>
-    <strong>Resting Blood Pressure (mmHg) : </strong> {{ history.trestbps }}<br>
-    <strong>Serum Cholestoral (mg/dl) : </strong> {{ history.chol }}<br>
-    <strong>Fasting Blood Sugar > 120 mg/dl : </strong> {{ history.fbs }}<br>
-    <strong>Resting Electrocardiographic Results : </strong> {{ history.restecg }}<br>
-    <strong>Maximum Heart Rate : </strong> {{ history.thalach }}<br>
-    <strong>Exercise Induced Angina : </strong> {{ history.exang }}<br>
-    <strong>ST Depression (mmHg) : </strong> {{ history.oldpeak }}<br>
-    <strong>Slope of Peak Exercise ST Segment : </strong> {{ history.slope }}<br>
-    <strong>Number of Vessels Colored by Flourosopy : </strong> {{ history.ca }}<br>
-    <strong>Thalassemia </strong> {{ history.thal }}<br>
-</p>
-{% for message in messages %}
-<div class="alert alert-{{ message.tags }}" role="alert">
-    {{ message.message }}
+{% block DashBoard %}
+<div class="container" style="width: 750px;" id="result">
+    <h1 style="text-align: center;"> Heart Disease Prediction Result</h1>
+    <hr class="hr-dark">
+    <h3>Patient Details:</h3>
+    <div class="row">
+        <div class="col-6">
+            <strong>Username:</strong> {{ user.username }}
+        </div>
+        <div class="col-6">
+            <strong>Name:</strong> {{ user.first_name }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <strong>Age:</strong> {{ history.age }}
+        </div>
+        <div class="col-6">
+            <strong>Sex:</strong> {{ history.sex }}
+        </div>
+    </div>
+
+    <hr class="hr-dark">
+    <h3>Test Values:</h3>
+
+    <div class="row">
+        <div class="col-6">
+            <strong>Chest Pain Type : </strong> {{ history.cp }}
+        </div>
+        <div class="col-6">
+            <strong>Resting Blood Pressure (mmHg) : </strong> {{ history.trestbps }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <strong>Serum Cholestoral (mg/dl) : </strong> {{ history.chol }}<br>
+        </div>
+        <div class="col-6">
+            <strong>Fasting Blood Sugar > 120 mg/dl : </strong> {{ history.fbs }}<br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <strong>Resting Electrocardiographic Results : </strong> {{ history.restecg }}<br>
+        </div>
+        <div class="col-6">
+            <strong>Maximum Heart Rate : </strong> {{ history.thalach }}<br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <strong>Exercise Induced Angina : </strong> {{ history.exang }}<br>
+        </div>
+        <div class="col-6">
+            <strong>ST Depression (mmHg) : </strong> {{ history.oldpeak }}<br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <strong>Slope of Peak Exercise ST Segment : </strong> {{ history.slope }}<br>
+        </div>
+        <div class="col-6">
+            <strong>Number of Vessels Colored by Flourosopy : </strong> {{ history.ca }}<br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <strong>Thalassemia: </strong> {{ history.thal }}<br>
+        </div>
+        <div class="col-6">
+        </div>
+    </div>
+
+    <hr class="hr-dark">
+    <h3>Result</h3>
+
+    <h6>Result summer:
+        <strong>
+            {% if history.target == 1 %}
+            You are likely to have heart disease.
+            {% else %}
+            You are likely not to have heart disease.
+            {% endif %}
+        </strong>
+    </h6>
+    </p>
+    {% for message in messages %}
+    <div class="alert alert-{{ message.tags }}" role="alert">
+        {{ message.message }}
+    </div>
+    {% endfor %}
+    <strong>Tested on: </strong> {{ history.createdAt }}<br>
 </div>
-{% endfor %}
+<br>
+<center>
+    <button onclick="window.printDiv() " class="btn btn-primary">Print</button>
+</center>
+<script>
+    function printDiv() {
+        var printContents = document.getElementById('result').innerHTML;
+        var originalContents = document.body.innerHTML;
+        document.body.innerHTML = printContents;
+        window.print();
+        document.body.innerHTML = originalContents;
+    }
+</script>
 {% endblock %}

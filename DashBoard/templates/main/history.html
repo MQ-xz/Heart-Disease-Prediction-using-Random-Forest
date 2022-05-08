@@ -12,34 +12,33 @@
                 {% for attribute in attributes %}
                 <th>{{ attribute.name }}</th>
                 {% endfor %}
-                <td>Action</td>
-
-
             </tr>
         </thead>
         <tbody>
             <!-- for each history print each attributes values -->
             {% if histories %}
             {% for history in histories %}
-            <tr>
-                <td>{{ history.age }}</td>
-                <td>{{ history.sex }}</td>
-                <td>{{ history.cp }}</td>
-                <td>{{ history.trestbps }}</td>
-                <td>{{ history.chol }}</td>
-                <td>{{ history.fbs }}</td>
-                <td>{{ history.restecg }}</td>
-                <td>{{ history.thalach }}</td>
-                <td>{{ history.exang }}</td>
-                <td>{{ history.oldpeak }}</td>
-                <td>{{ history.slope }}</td>
-                <td>{{ history.ca }}</td>
-                <td>{{ history.thal }}</td>
-                <td>{{ history.target }}</td>
-                <td>{{ history.pos }}%</td>
-                <td>{{ history.createdAt|date:"d/m/Y" }}</td>
-                <td> <a href="{% url 'printHistory' history.id %}" class="btn btn-primary">Print</a></td>
-            </tr>
+            <a href="">
+                <tr onclick="window.location='/printHistory/{{history.id}}';">
+                    <td>{{ history.age }}</td>
+                    <td>{{ history.sex }}</td>
+                    <td>{{ history.cp }}</td>
+                    <td>{{ history.trestbps }}</td>
+                    <td>{{ history.chol }}</td>
+                    <td>{{ history.fbs }}</td>
+                    <td>{{ history.restecg }}</td>
+                    <td>{{ history.thalach }}</td>
+                    <td>{{ history.exang }}</td>
+                    <td>{{ history.oldpeak }}</td>
+                    <td>{{ history.slope }}</td>
+                    <td>{{ history.ca }}</td>
+                    <td>{{ history.thal }}</td>
+                    <td>{{ history.target }}</td>
+                    <td>{{ history.pos }}%</td>
+                    <td>{{ history.createdAt|date:"d/m/Y" }}</td>
+                </tr>
+            </a>
+
 
             {% endfor %}
 
@@ -53,4 +52,11 @@
         </tbody>
     </table>
 </div>
+<script>jQuery(document).ready(function ($) {
+        $(".clickable-row").click(function () {
+            window.location = $(this).data("href");
+        });
+    });
+</script>
+
 {% endblock %}
