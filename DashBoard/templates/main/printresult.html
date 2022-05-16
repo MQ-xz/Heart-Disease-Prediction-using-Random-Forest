@@ -18,7 +18,7 @@
             <strong>Age:</strong> {{ history.age }}
         </div>
         <div class="col-6">
-            <strong>Sex:</strong> {{ history.sex }}
+            <strong>Sex:</strong> {{ history.get_sex_display }}
         </div>
     </div>
 
@@ -27,7 +27,7 @@
 
     <div class="row">
         <div class="col-6">
-            <strong>Chest Pain Type : </strong> {{ history.cp }}
+            <strong>Chest Pain Type : </strong> {{ history.get_cp_display }}
         </div>
         <div class="col-6">
             <strong>Resting Blood Pressure (mmHg) : </strong> {{ history.trestbps }}
@@ -38,12 +38,12 @@
             <strong>Serum Cholestoral (mg/dl) : </strong> {{ history.chol }}<br>
         </div>
         <div class="col-6">
-            <strong>Fasting Blood Sugar > 120 mg/dl : </strong> {{ history.fbs }}<br>
+            <strong>Fasting Blood Sugar > 120 mg/dl : </strong> {{ history.get_fbs_display }}<br>
         </div>
     </div>
     <div class="row">
         <div class="col-6">
-            <strong>Resting Electrocardiographic Results : </strong> {{ history.restecg }}<br>
+            <strong>Resting Electrocardiographic Results : </strong> {{ history.get_restecg_display }}<br>
         </div>
         <div class="col-6">
             <strong>Maximum Heart Rate : </strong> {{ history.thalach }}<br>
@@ -51,7 +51,7 @@
     </div>
     <div class="row">
         <div class="col-6">
-            <strong>Exercise Induced Angina : </strong> {{ history.exang }}<br>
+            <strong>Exercise Induced Angina : </strong> {{ history.get_exang_display }}<br>
         </div>
         <div class="col-6">
             <strong>ST Depression (mmHg) : </strong> {{ history.oldpeak }}<br>
@@ -59,7 +59,7 @@
     </div>
     <div class="row">
         <div class="col-6">
-            <strong>Slope of Peak Exercise ST Segment : </strong> {{ history.slope }}<br>
+            <strong>Slope of Peak Exercise ST Segment : </strong> {{ history.get_slope_display }}<br>
         </div>
         <div class="col-6">
             <strong>Number of Vessels Colored by Flourosopy : </strong> {{ history.ca }}<br>
@@ -67,7 +67,7 @@
     </div>
     <div class="row">
         <div class="col-6">
-            <strong>Thalassemia: </strong> {{ history.thal }}<br>
+            <strong>Thalassemia: </strong> {{ history.get_thal_display }}<br>
         </div>
         <div class="col-6">
         </div>

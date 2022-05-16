@@ -21,19 +21,19 @@
             <a href="">
                 <tr onclick="window.location='/history/{{history.id}}';">
                     <td>{{ history.age }}</td>
-                    <td>{{ history.sex }}</td>
-                    <td>{{ history.cp }}</td>
+                    <td>{{ history.get_sex_display }}</td>
+                    <td>{{ history.get_cp_display }}</td>
                     <td>{{ history.trestbps }}</td>
                     <td>{{ history.chol }}</td>
-                    <td>{{ history.fbs }}</td>
-                    <td>{{ history.restecg }}</td>
+                    <td>{{ history.get_fbs_display }}</td>
+                    <td>{{ history.get_restecg_display }}</td>
                     <td>{{ history.thalach }}</td>
-                    <td>{{ history.exang }}</td>
+                    <td>{{ history.get_exang_display }}</td>
                     <td>{{ history.oldpeak }}</td>
-                    <td>{{ history.slope }}</td>
+                    <td>{{ history.get_slope_display }}</td>
                     <td>{{ history.ca }}</td>
-                    <td>{{ history.thal }}</td>
-                    <td>{{ history.target }}</td>
+                    <td>{{ history.get_thal_display }}</td>
+                    <td>{{ history.get_target_display }}</td>
                     <td>{{ history.pos }}%</td>
                     <td>{{ history.createdAt|date:"d/m/Y" }}</td>
                 </tr>
