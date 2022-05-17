@@ -1,4 +1,3 @@
-from os import pread
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.forms import AuthenticationForm
@@ -48,6 +47,7 @@ class Login(View):
                 messages.error(request, "Invalid username or password.")
         else:
             messages.error(request, "Invalid username or password.")
+        return render(request=request, template_name="auth/login.html", context={"form": form})
 
 
 class Register(View):
