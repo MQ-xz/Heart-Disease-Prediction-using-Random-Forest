@@ -12,7 +12,7 @@ urlpatterns = [
 
     path('history', HistoryView.as_view(), name='history'),
     path('history/<int:pk>', PrintResult.as_view(), name='printHistory'),
-    
+
     path('user', Users.as_view(), name='users'),
     path('user/<int:pk>', UserDetail.as_view(), name='userDetail'),
 ]
